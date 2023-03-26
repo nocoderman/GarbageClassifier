@@ -6,12 +6,13 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import *
 from tensorflow.keras.optimizers import RMSprop, Adam
+from sklearn.metrics import classification_report
 
 #Variables to play with settings
-num_classes = 5
+num_classes = 2
 img_height, img_width = 32, 32
 batch_size = 32
-epoch_num = 60
+epoch_num = 30
 verbose_num = 2
 
 #Load Data
@@ -63,7 +64,11 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.Conv2D(16, (3,3), activation='relu'),
     tf.keras.layers.MaxPooling2D(2,2),
     tf.keras.layers.Flatten(),
-    tf.keras.layers.Dense(512, activation='relu'),
+    # tf.keras.layers.Dense(512, activation='relu'),
+    tf.keras.layers.Dense(256, activation='relu'),
+    tf.keras.layers.Dense(128, activation='relu'),
+    tf.keras.layers.Dense(64, activation='relu'),
+    tf.keras.layers.Dense(32, activation='relu'),
     tf.keras.layers.Dense(num_classes, activation='softmax')
 ])
 
@@ -99,9 +104,23 @@ plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='upper left')
 plt.show()
 
+
+
 # Print the highest accuracy and val_acuracy to terminal
 print("highest acc")
 print(max(hist.history['accuracy']))
 print("highest val acc")
 print(max(hist.history['val_accuracy']))
+
+
+# Classifcation Report
+predict = model.predict(X_test)
+y_val2 = tf.keras.utils.to_categorical(Y_test, num_classes)
+
+predict = np.argmax(predict, axis=1)
+y_val2 =  np.argmax(y_val2, axis=1)
+# print(y_val2.shape)
+# print(predict.shape)
+
+print(classification_report(y_val2, predict))
 
