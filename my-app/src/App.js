@@ -1,6 +1,6 @@
 import { useState } from 'react'
+import React, { Component }  from 'react';  
 import axios from "axios";
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -16,7 +16,8 @@ function App() {
       const res = response.data
       setClassifyData(({
         image_prediction: res.name,
-        accuracy_percentage: res.about}))
+        // accuracy_percentage: res.about
+      }))
     }).catch((error) => {
       if (error.response){
         console.log(error.response)
@@ -30,8 +31,8 @@ function App() {
     <div className="App">
         <p>To get your profile details: </p><button onClick={getData}>Click me</button>
         {classifyData && <div>
-              <p>Profile name: {classifyData.profile_name}</p>
-              <p>About me: {classifyData.about_me}</p>
+              <p>Profile name: {classifyData.image_prediction}</p>
+              {/* <p>About me: {classifyData.accuracy_percentage}</p> */}
             </div>
         }      
     </div>
