@@ -5,63 +5,63 @@ import './App.css';
 function App() {
 
   const [classifyData, setClassifyData] = useState(null);
-  const [file, setFile] = useState(null);
+  const [selectedFile, setSelectedFile] = useState(null);
 
-  const handleFileChange = event => {
-    setFile(event.target.files[0]);
+  const handleFileInput = (event) => {
+    setSelectedFile(event.target.files[0]);
   };
 
-  const handleUpload = () => {
-    const formData = new FormData();
-    formData.append('image', file);
-    fetch('/upload', {
-      method: 'POST',
-      body: formData
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Assuming the Flask server returns the URL of the uploaded image in the "url" field of the JSON response
-      const imageUrl = data.url;
-      
-      // Set the src attribute of an img element to display the uploaded image
-      const imageElement = document.getElementById('uploaded-image');
-      imageElement.src = imageUrl;
-    })
-      .catch(error => {
-        console.log("error")
-      });
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    if (selectedFile) {
+      uploadImage(selectedFile);
+    }
   };
 
-  function getData(){
+  function uploadImage(inputFile) {
     axios({
-      method: "GET",
-      url: "/main",
+      method: "POST",
+      url: "/upload",
+      data: {
+        file: inputFile
+      },
+      headers: { 'Content-Type': 'multipart/form-data' }
     })
     .then((response) => {
-      const res = response.data
-      setClassifyData(({
-        image_prediction: res.name,
-        // accuracy_percentage: res.about
-      }))
+      const data = response.data
+      if (data.success) {
+        console.log("File uploaded successfully");
+        // console.log(data.filename);
+        setClassifyData(({
+          image_prediction: data.result,
+          // accuracy_percentage: res.about
+        }))
+        console.log(data.result);
+        // console.log(filename);
+      }
     }).catch((error) => {
       if (error.response){
         console.log(error.response)
         console.log(error.response.status)
         console.log(error.response.headers)
       }
-  })}
-  
+    }
+  )}
 
   return (
     <div className="App">
-        {/* <input name="img" type="file" onChange={handleFileChange}></input>
-        <button type="button" onClick={handleUpload}>Upload</button> */}
-        <button type="button" onClick={getData}>Compute</button>
-      {classifyData && <div>
-            <p>Prediction: {classifyData.image_prediction}</p>
-          </div>
-      }      
+      <form onSubmit={handleFormSubmit}>
+        <input type="file" onChange={handleFileInput} />
+        <button type="submit">Upload</button>
+      </form>
+      {selectedFile && <img className="temp-img" src={URL.createObjectURL(selectedFile)} alt="Selected Image" />}
+      {(classifyData) && <div>
+      <p>Prediction: {classifyData.image_prediction}</p>
+      </div>}  
     </div>
+
+
+
   );
 }
 
