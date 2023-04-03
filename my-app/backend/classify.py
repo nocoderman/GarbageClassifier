@@ -25,13 +25,15 @@ def classify(img_path):
     model = tf.keras.models.load_model('./classifier_model.tf')
     prediction = model.predict(img_preprocessed)
     class_num = np.argmax(prediction[0])
-
+    # print(prediction)
+    accuracy = str(prediction[0][class_num] * 100) + "%"
+    print(accuracy)
     if class_num == 0:
         print("COMPOSTABLE WASTE")
-        return "COMPOSTABLE WASTE"
+        return "COMPOSTABLE WASTE", accuracy
     else:
         print("RECYCLABLE WASTE")
-        return "RECYCLABLE WASTE"
+        return "RECYCLABLE WASTE", accuracy
 
 # classify("plastic_bag.jpg")
 # classify("cardboard.JPG")

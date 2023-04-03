@@ -20,9 +20,9 @@ def upload_file():
     print("filename: ", filename)
     filePath = os.path.join(os.getcwd(), filename)
     print("filePath: ", filePath)
-    result = classify(filePath)
+    result, accuracy = classify(filePath)
     # Do something with the file variable
-    return jsonify({"success": True, "result": str(result)})
+    return jsonify({"success": True, "result": str(result), "accuracy": str(accuracy)})
 
 
 if __name__ == "__main__":

@@ -37,12 +37,12 @@ function App() {
       const data = response.data
       if (data.success) {
         console.log("File uploaded successfully");
-        // console.log(data.filename);
         setClassifyData(({
           image_prediction: data.result,
-          // accuracy_percentage: res.about
+          accuracy_percentage: data.accuracy
         }))
         console.log(data.result);
+        // console.log(data.accuracy);
         // console.log(filename);
       }
     }).catch((error) => {
