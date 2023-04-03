@@ -33,7 +33,4 @@ def classify(img_path):
         print("RECYCLABLE WASTE")
         return "RECYCLABLE WASTE"
 
-# classify("plastic_bag.jpg")
-# classify("cardboard.JPG")
-# classify("Garbage classification/Garbage classification/Organic/O_12587.jpg")
-
+classify("Garbage classification/Garbage classification/Organic/O_12587.jpg")
