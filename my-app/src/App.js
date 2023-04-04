@@ -14,6 +14,7 @@ function App() {
 
   const handleFileInput = (event) => {
     setSelectedFile(event.target.files[0]);
+    setClassifyData(null);
   };
 
   const handleFormSubmit = (event) => {
@@ -22,6 +23,7 @@ function App() {
       uploadImage(selectedFile);
     }
   };
+
 
 
   function uploadImage(inputFile) {
@@ -63,17 +65,25 @@ function App() {
             GARBAGE CLASSIFIER
           </p>
         </div>
-        <form onSubmit={handleFormSubmit}>
-          <label className="file-input-label">
-            <input className="file-input" type="file" ref={fileInput} onChange={handleFileInput} style={{display:'none'}}/>
-            <FaCloudUploadAlt/> Attach
-          </label>
-          <button type="submit">Upload</button>
-        </form>
-        {selectedFile && <img className="temp-img" src={URL.createObjectURL(selectedFile)} alt="Selected Image" />}
-        {(classifyData) && <div>
-        <p>Prediction: {classifyData.image_prediction}</p>
-        </div>}  
+
+        <div className="app-input">
+          <form id="myForm" onSubmit={handleFormSubmit}>
+            <label className="file-input-button">
+              <div className="input-container">
+                <input className="file-input" type="file" ref={fileInput} onChange={handleFileInput} style={{display:'none'}}/>
+                <FaCloudUploadAlt/> 
+                <p className="attach-text">Attach Image</p>
+              </div>
+            </label>
+            {selectedFile && <img className="temp-img" src={URL.createObjectURL(selectedFile)} alt="Selected Image" />}
+            {(classifyData) && <div>
+            <p className="prediction-text">Prediction: {classifyData.image_prediction}</p>
+            </div>}
+            <button className="upload-button" type="submit">Compute Prediction</button>
+
+          </form>
+
+        </div>
       </div>
     </div>
   );

@@ -3,14 +3,24 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  margin-top: 10%;
+  width:100%;
+  height:100%;
+  margin-top:10%;
 }
 
 .temp-img{
-  width: 50%;
-  height: 50%;
+  width:200px;
+  height:200px;
+  display: block;
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.prediction-text{
+  display: block;
+  margin-top: 5%;
+  margin-left: 25%;
 }
 
 .main-container{
@@ -25,8 +35,8 @@
 
   position: relative;
   margin: 0 auto;
-  width: 400px;
-  height: 450px;
+  width:500px;
+  height:600px;
 }
 
 .app-header{
@@ -36,8 +46,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  top: 0;
-  left: 0;
+  top:0;
+  left:0;
 }
 
 .header-text{
@@ -45,8 +55,60 @@
   font-weight: bold;
 }
 
-.file-input-label:hover{
-  background-color: #777;
-  cursor: pointer;
+.app-input{
+  width: 100%;
+  height: 100%;
+  display:block;
+  justify-content:center;
+  align-items: center;
+  position:relative;
+}
 
+
+.input-container{
+  display: flex;
+  height:35px;
+  width:140px;
+  justify-content: center;
+  align-items: center;
+  border:1px solid gray;
+  border-radius: 20px;
+  background-color: lightblue;
+  opacity:0.8;
+  box-shadow: 0 10px 6px -8px #777;
+  transition: 1s;
+  margin-left:35%;
+  margin-top:7%;
+
+}
+
+.input-container:hover{
+  opacity:1;
+  cursor:pointer;
+  box-shadow: 0 10px 6px -6px #777;
+}
+
+.attach-text{
+  margin-left:5px;
+}
+
+.upload-button{
+  position: absolute;
+  bottom:10%;
+  right:41%;
+  height:35px;
+  width:100px;
+  border:1px solid gray;
+  border-radius: 20px;
+  background-color: lightcoral;
+  opacity:0.8;
+  box-shadow: 0 10px 6px -8px #777;
+  transition: 1s;
+
+}
+
+.upload-button:hover{
+  opacity:1;
+  cursor:pointer;
+  box-shadow: 0 10px 6px -6px #777;
 }
