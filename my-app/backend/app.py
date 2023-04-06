@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from classify import *
+from classify import classify
 import os
 from werkzeug.utils import secure_filename
 
