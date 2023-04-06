@@ -1,9 +1,11 @@
 import collections
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
-import tensorflow as tf
+# import tensorflow as tf
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
 from tensorflow.keras.preprocessing import image
+from tensorflow.keras.models import load_model
+
 # import image from PIL
 import numpy as np
 
@@ -22,7 +24,7 @@ def classify(img_path):
     # img_preprocessed = img_batch
 
     # Recreate model
-    model = tf.keras.models.load_model('./classifier_model.tf')
+    model = load_model('./classifier_model.tf')
     prediction = model.predict(img_preprocessed)
     class_num = np.argmax(prediction[0])
     # print(prediction)

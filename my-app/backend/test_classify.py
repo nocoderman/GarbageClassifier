@@ -1,12 +1,12 @@
 import collections
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
-import tensorflow as tf
+# import tensorflow as tf
 from tensorflow.keras.applications.resnet50 import preprocess_input, decode_predictions
 from tensorflow.keras.preprocessing import image
 # import image from PIL
+from tensorflow.keras.models import load_model
 import numpy as np
-
 
 # Show the model architecture
 # model.summary()
@@ -22,7 +22,7 @@ def classify(img_path):
     # img_preprocessed = img_batch
 
     # Recreate model
-    model = tf.keras.models.load_model('./classifier_model.tf')
+    model = load_model('./classifier_model.tf')
     prediction = model.predict(img_preprocessed)
     class_num = np.argmax(prediction[0])
 
@@ -33,4 +33,4 @@ def classify(img_path):
         print("RECYCLABLE WASTE")
         return "RECYCLABLE WASTE"
 
-classify("Garbage classification/Garbage classification/Organic/O_12587.jpg")
+classify("./banana.jpg")
